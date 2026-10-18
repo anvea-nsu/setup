@@ -7,6 +7,12 @@ GIT_USER="anvea-nsu"
 
 LIMIT="1000"
 
+root_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+output_dir="$(dirname "${root_dir}")/${GIT_USER}"
+
+mkdir -p "${output_dir}"
+cd "${output_dir}"
+
 mkdir -p Subjects Semesters/{1..8}/Subjects
 
 repos=$(gh repo list ${GIT_USER} --topic subjects --limit ${LIMIT} --json name --jq '.[].name')
@@ -30,4 +36,3 @@ for i in {1..8}; do
 		fi
 	done
 done
-
